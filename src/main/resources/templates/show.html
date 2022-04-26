@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+<p th:text="${user.getUsername()}">VALUE</p>
+<p th:text="${'Age: ' + user.getAge()}">VALUE</p>
+<p th:text="${'Height: ' + user.getHeight()}">VALUE</p>
+<p th:text="${'Weight: ' + user.getWeight()}">VALUE</p>
+<p th:text="${'Sex: ' + user.getSex()}">VALUE</p>
+
+</body>
+</html>
