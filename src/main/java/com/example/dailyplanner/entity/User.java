@@ -1,6 +1,7 @@
 package com.example.dailyplanner.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +28,9 @@ public class User {
     @Column
     private String sex;
 
-//    @ManyToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
-//    @JoinTable(name="user_calories",
-//                joinColumns = @JoinColumn("user_id"),
-//                inverseJoinColumns = @JoinColumn("item_id"))
-//    private List<Product> products;
+    @OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    @JoinColumn(name="user_id")
+    private List<Product> products;
 
     public User(String username, int age, int height, int weight, String sex) {
         this.username = username;
@@ -92,11 +91,17 @@ public class User {
         this.sex = sex;
     }
 
-//    public List<Product> getProducts() {
-//        return products;
-//    }
-//
-//    public void setProducts(List<Product> products) {
-//        this.products = products;
-//    }
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public void addProductToUser(Product product) {
+        if(products == null)
+            products = new ArrayList<>();
+        products.add(product);
+    }
 }
