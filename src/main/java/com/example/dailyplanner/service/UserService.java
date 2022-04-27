@@ -12,7 +12,4 @@ public interface UserService {
     public void saveUser(User user);
 
     public void deleteUser(int id);
-
-
-
 }

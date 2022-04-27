@@ -1,6 +1,7 @@
 package com.example.dailyplanner.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="products")
@@ -25,7 +26,13 @@ public class Product {
     @Column
     private int calories;
 
-    public Product() {
+//    @ManyToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+//    @JoinTable(name="user_calories",
+//                joinColumns = @JoinColumn("item_id"),
+//                inverseJoinColumns = @JoinColumn("user_id"))
+//    private List<User> users;
+
+   public Product() {
     }
 
     public Product(String itemName, double proteins, double fats, double carbohydrates, int calories) {
