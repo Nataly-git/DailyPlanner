@@ -34,6 +34,7 @@ Edit User
     <input type="radio" th:field="*{sex}" id="female"
            name="sex" value="female">
     <label for="female">Female</label>
+    <div style="color:red" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">Sex error</div>
     <br/>
     <input type="submit" value="Update!"/>
 </form>

@@ -1,6 +1,10 @@
 package com.example.dailyplanner.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -11,20 +15,35 @@ public class Product {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
+    @Size(min=3, max=20, message="Item name should be between 3 and 20 characters")
     @Column(name="item_name")
     private String itemName;
 
+    @PositiveOrZero
     @Column
     private double proteins;
 
+    @PositiveOrZero
     @Column
     private double fats;
 
+    @PositiveOrZero
     @Column
     private double carbohydrates;
 
+    @Positive(message="Calories amount should be more than 0")
     @Column
     private int calories;
+
+    @Positive(message="Weight amount should be more than 0")
+    @Column(name="product_weight")
+    private int productWeight;
+
+    @ManyToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    @JoinTable(name="user_calories",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name="product_id"))
+    private List<User> users;
 
     public Product() {
     }
@@ -83,5 +102,13 @@ public class Product {
 
     public void setCalories(int calories) {
         this.calories = calories;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
