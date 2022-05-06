@@ -1,6 +1,7 @@
 package com.example.dailyplanner.service;
 
 import com.example.dailyplanner.dao.UserRepository;
+import com.example.dailyplanner.entity.Product;
 import com.example.dailyplanner.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -29,7 +31,7 @@ UserServiceImpl implements UserService{
         Optional<User> optional = userRepository.findById(id);
         if(optional.isPresent())
             user = optional.get();
-        return userRepository.getById(id);
+        return user;
     }
 
     @Override
@@ -41,4 +43,17 @@ UserServiceImpl implements UserService{
     public void deleteUser(int id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public void addProductToUser(int id, Product product) {
+        User user = getUser(id);
+        user.getProducts().add(product);
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
+    }
+
+
 }

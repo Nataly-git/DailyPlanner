@@ -1,12 +1,18 @@
 package com.example.dailyplanner.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name="products")
 public class Product {
@@ -35,9 +41,9 @@ public class Product {
     @Column
     private int calories;
 
-    @Positive(message="Weight amount should be more than 0")
+//    @Positive(message="Weight amount should be more than 0")
     @Column(name="product_weight")
-    private int productWeight;
+    private int productWeight = 100;
 
     @ManyToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
     @JoinTable(name="user_calories",
@@ -56,59 +62,9 @@ public class Product {
         this.calories = calories;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public double getProteins() {
-        return proteins;
-    }
-
-    public void setProteins(double proteins) {
-        this.proteins = proteins;
-    }
-
-    public double getFats() {
-        return fats;
-    }
-
-    public void setFats(double fats) {
-        this.fats = fats;
-    }
-
-    public double getCarbohydrates() {
-        return carbohydrates;
-    }
-
-    public void setCarbohydrates(double carbohydrates) {
-        this.carbohydrates = carbohydrates;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void addUser(User user) {
+        if(users == null)
+            users = new ArrayList<>();
+        users.add(user);
     }
 }

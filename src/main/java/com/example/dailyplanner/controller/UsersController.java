@@ -43,7 +43,7 @@ public class UsersController {
         if(bindingResult.hasErrors())
             return "new";
         userService.saveUser(user);
-        return "redirect:/users";
+        return "redirect:/login";
     }
 
     @GetMapping("/{id}/edit")

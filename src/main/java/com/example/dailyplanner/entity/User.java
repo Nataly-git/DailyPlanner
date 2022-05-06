@@ -1,13 +1,13 @@
 package com.example.dailyplanner.entity;
 
-import org.hibernate.validator.constraints.Range;
-
+import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+@Data
 @Entity
 @Table(name="users_info")
 public class User {
@@ -45,6 +45,16 @@ public class User {
                inverseJoinColumns = @JoinColumn(name="product_id"))
     private List<Product> products;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column
+    private boolean active;
+
+    @Column
+    @NotBlank
+    private String password;
+
     public User(String username, int age, int height, int weight, String sex) {
         this.username = username;
         this.age = age;
@@ -54,62 +64,6 @@ public class User {
     }
 
     public User() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 
     public void addProductToUser(Product product) {

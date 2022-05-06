@@ -35,6 +35,10 @@ Create new User
            name="sex" value="female">
     <label for="female">Female</label>
     <br/>
+    <label for="password">Enter password: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
+    <br/>
     <input type="submit" value="Create!"/>
 </form>
 
