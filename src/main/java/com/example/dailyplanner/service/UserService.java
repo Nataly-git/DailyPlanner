@@ -19,4 +19,5 @@ public interface UserService {
 
     public User findUserByUsername(String username);
 
+    public boolean checkLoginAndPassword(User user);
 }

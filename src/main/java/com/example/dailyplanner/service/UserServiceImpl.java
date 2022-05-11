@@ -55,5 +55,13 @@ UserServiceImpl implements UserService{
         return userRepository.findUserByUsername(username);
     }
 
-
+    @Override
+    public boolean checkLoginAndPassword(User user) {
+        for (User us : getAllUsers()) {
+            if (us.getUsername().equals(user.getUsername()) && us.getPassword().equals(user.getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

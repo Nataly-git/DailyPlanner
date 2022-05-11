@@ -13,15 +13,33 @@
 <hr class="featurette-divider">
 <hr class="featurette-divider">
 
-<div th:each="product : ${products}">
-    <a th:href="@{/products/{id}(id=${product.getId()})}"
-       th:text="${product.getItemName() + ', ' + product.getCalories() + ' kkal'}">product</a>
-</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Calories in 100g</th>
+        <th>Operations</th>
+    </tr>
+    </thead>
+<tbody>
+<tr th:each="product : ${products}">
+    <td th:text="${product.getItemName()}"></td>
+    <td th:text="${product.getCalories()}"></td>
+    <td>
 
-<br/>
-<hr/>
+        <form th:method="GET" th:action="@{/products/{id}(id=${product.getId()})}">
+            <input type="submit" value="Show details"/>
+        </form>
+    </td>
+</tr>
+</tbody>
+</table>
 
-<a th:href="@{/products/new}">Create new product</a>
+<br>
+
+<form th:method="POST" th:action="@{/products/new}">
+    <input type="submit" value="Add new item"/>
+</form>
 
 <hr class="featurette-divider">
 
