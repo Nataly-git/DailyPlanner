@@ -5,11 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -41,14 +39,15 @@ public class Product {
     @Column
     private int calories;
 
-//    @Positive(message="Weight amount should be more than 0")
+    @Positive(message="Weight amount should be more than 0")
     @Column(name="product_weight")
     private int productWeight = 100;
 
-    @ManyToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    @ManyToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH},
+                fetch = FetchType.EAGER)
     @JoinTable(name="user_calories",
-            joinColumns = @JoinColumn(name="user_id"),
-            inverseJoinColumns = @JoinColumn(name="product_id"))
+            joinColumns = @JoinColumn(name="product_id"),
+            inverseJoinColumns = @JoinColumn(name="user_id"))
     private List<User> users;
 
     public Product() {
@@ -60,11 +59,5 @@ public class Product {
         this.fats = fats;
         this.carbohydrates = carbohydrates;
         this.calories = calories;
-    }
-
-    public void addUser(User user) {
-        if(users == null)
-            users = new ArrayList<>();
-        users.add(user);
     }
 }

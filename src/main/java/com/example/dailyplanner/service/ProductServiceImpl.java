@@ -40,4 +40,9 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(int id) {
         productRepository.deleteById(id);
     }
+
+    @Override
+    public Product getProductByName(String itemName) {
+        return productRepository.findFirstByItemName(itemName);
+    }
 }

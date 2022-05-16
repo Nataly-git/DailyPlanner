@@ -2,7 +2,7 @@ package com.example.dailyplanner.controller;
 
 import com.example.dailyplanner.entity.Role;
 import com.example.dailyplanner.entity.User;
-import com.example.dailyplanner.security.NoSuchUserException;
+import com.example.dailyplanner.exceptions.NoSuchUserException;
 import com.example.dailyplanner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

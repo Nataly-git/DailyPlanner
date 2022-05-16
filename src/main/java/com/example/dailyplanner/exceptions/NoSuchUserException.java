@@ -1,4 +1,4 @@
-package com.example.dailyplanner.security;
+package com.example.dailyplanner.exceptions;
 
 public class NoSuchUserException extends RuntimeException{
     public NoSuchUserException() {

@@ -19,10 +19,6 @@
 <p th:text="${'Carbohydrates: ' + product.getCarbohydrates()}">VALUE</p>
 <p th:text="${'Calories: ' + product.getCalories()}">VALUE</p>
 
-<!--<form th:method="POST" th:action="@{/products/{id}/edit(id=${product.getId()})}">-->
-<!--    <input type="submit" value="Edit!"/>-->
-<!--    <br/>-->
-
 <form th:method="POST" th:action="@{/products/{id}/edit(id=${product.getId()})}">
     <input type="submit" value="Edit!"/>
 <br/>

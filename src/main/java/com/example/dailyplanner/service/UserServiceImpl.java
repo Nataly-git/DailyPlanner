@@ -6,6 +6,7 @@ import com.example.dailyplanner.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,9 +46,23 @@ UserServiceImpl implements UserService{
     }
 
     @Override
-    public void addProductToUser(int id, Product product) {
-        User user = getUser(id);
-        user.getProducts().add(product);
+    public void addProductToUser(User user, Product product) {
+        List<Product> products = user.getProducts();
+        if(products == null) {
+            products = new ArrayList<>();
+        }
+        products.add(product);
+        saveUser(user);
+    }
+
+    @Override
+    public void deleteProductFromUser(User user, int productId) {
+        List<Product> products = user.getProducts();
+        if(products == null) {
+            products = new ArrayList<>();
+        }
+        products.remove(productId);
+        saveUser(user);
     }
 
     @Override
@@ -64,4 +79,6 @@ UserServiceImpl implements UserService{
         }
         return false;
     }
+
+
 }

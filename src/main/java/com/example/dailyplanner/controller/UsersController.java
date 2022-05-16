@@ -1,16 +1,16 @@
 package com.example.dailyplanner.controller;
 
-import com.example.dailyplanner.entity.Role;
 import com.example.dailyplanner.entity.User;
+import com.example.dailyplanner.service.ProductService;
 import com.example.dailyplanner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 
 import javax.validation.Valid;
-import java.util.Collections;
 
 @Controller
 @RequestMapping("/users")
@@ -35,20 +35,6 @@ public class UsersController {
         return "show";
     }
 
-//    @GetMapping("/new")
-//    public String newUser(@ModelAttribute("user") User user) {
-//        return "new";
-//    }
-//
-//    @PostMapping
-//    public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
-//        if(bindingResult.hasErrors())
-//            return "new";
-//        user.setRole(Role.USER);
-//        userService.saveUser(user);
-//        return "redirect:/login";
-//    }
-
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
@@ -69,4 +55,6 @@ public class UsersController {
         userService.deleteUser(id);
         return "redirect:/users";
     }
+
+
 }

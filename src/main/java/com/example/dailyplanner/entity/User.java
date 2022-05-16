@@ -3,7 +3,6 @@ package com.example.dailyplanner.entity;
 import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -38,15 +37,13 @@ public class User {
     @NotBlank(message="You should choose one variant")
     private String sex;
 
-    @ManyToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    @ManyToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH},
+                fetch = FetchType.EAGER)
     @JoinTable(name="user_calories",
                joinColumns = @JoinColumn(name="user_id"),
                inverseJoinColumns = @JoinColumn(name="product_id"))
     private List<Product> products;
 
-//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-//    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
-//    @Column
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -66,11 +63,5 @@ public class User {
     }
 
     public User() {
-    }
-
-    public void addProductToUser(Product product) {
-        if(products == null)
-            products = new ArrayList<>();
-        products.add(product);
     }
 }

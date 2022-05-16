@@ -19,11 +19,7 @@
     You have been logged out.
 </div>
 
-<!--<form th:action="@{/login}" method="post">-->
-<!--    <div><label> User Name : <input type="text" name="username"/> </label></div>-->
-<!--    <div><label> Password: <input type="password" name="password"/> </label></div>-->
-<!--    <div><input type="submit" value="Sign In"/></div>-->
-<!--</form>-->
+
 <div class="container">
     <form th:action="@{/login}" th:method="post" th:object="${userSession}" style="margin-top: 100px">
 
@@ -45,8 +41,15 @@
     </form>
 </div>
 
-<a th:href="@{/new}">Add new user</a>
+<br/>
+<br/>
 
+<div>
+    <div class="mb-3" style="margin-top: 100px">
+        <h6>Dont have account?</h6>
+<br/>
+<a th:href="@{/new}">Registration</a>
+</div>
 <hr class="featurette-divider">
 
 <div th:insert="footer :: footer"></div>
