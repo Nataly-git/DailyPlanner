@@ -70,14 +70,15 @@ public class UserProductController {
         return "day_result";
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteProduct(Model model, @PathVariable("id") int id) {
         User user = sessionService.getSession();
         if(user == null) {
             throw new NoAuthoriseUserFoundException("You have to authorise to continue");
         }
         model.addAttribute("user", user);
-        userService.deleteProductFromUser(user, id);
+        Product product = productService.getProduct(id);
+        userService.deleteProductFromUser(user, product);
         return "redirect:/calc/day_result";
     }
 }

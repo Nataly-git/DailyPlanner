@@ -27,20 +27,31 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="product : ${products}">
-        <td th:text="${product.getItemName()}"></td>
-        <td th:text="${product.getProductWeight()}"></td>
-        <td th:text="${product.getProteins() / 100 * product.getProductWeight()}"></td>
-        <td th:text="${product.getFats() / 100 * product.getProductWeight()}"></td>
-        <td th:text="${product.getCarbohydrates() / 100 * product.getProductWeight()}"></td>
-        <td th:text="${product.getCalories() / 100 * product.getProductWeight()}"></td>
+    <tr th:each="product : ${user.products}">
+        <td th:text="${product.itemName}"></td>
+        <td th:text="${product.productWeight}"></td>
+        <td th:text="${product.proteins / 100 * product.productWeight}"></td>
+        <td th:text="${product.fats / 100 * product.productWeight}"></td>
+        <td th:text="${product.carbohydrates / 100 * product.productWeight}"></td>
+        <td th:text="${product.calories / 100 * product.productWeight}"></td>
         <td>
-            <form th:method="DELETE" th:action="@{/calc/{id}(id=${product.getId()})}">
+            <form th:method="POST" th:action="@{/calc/delete/{id}(id=${product.getId()})}">
                 <input type="submit" value="DELETE"/>
             </form>
         </td>
     </tr>
     </tbody>
+
+    <tfoot>
+    <tr>
+        <td />
+        <td><b th:text="Total"</td>
+        <td><b th:text="${#aggregates.sum(user.products.![proteins])}" /></td>
+        <td><b th:text="${#aggregates.sum(user.products.![fats])}" /></td>
+        <td><b th:text="${#aggregates.sum(user.products.![carbohydrates])}" /></td>
+        <td><b th:text="${#aggregates.sum(user.products.![calories])}" /></td>
+        </td>
+    </tr>
 </table>
 
 <br>

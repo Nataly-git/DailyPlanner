@@ -17,7 +17,7 @@ public interface UserService {
 
     public void addProductToUser(User user, Product product);
 
-    public void deleteProductFromUser(User user, int productId);
+    public void deleteProductFromUser(User user, Product product);
 
     public User findUserByUsername(String username);
 

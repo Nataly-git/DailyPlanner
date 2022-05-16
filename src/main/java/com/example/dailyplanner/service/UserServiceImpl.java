@@ -56,12 +56,12 @@ UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteProductFromUser(User user, int productId) {
+    public void deleteProductFromUser(User user, Product product) {
         List<Product> products = user.getProducts();
         if(products == null) {
             products = new ArrayList<>();
         }
-        products.remove(productId);
+        products.remove(product);
         saveUser(user);
     }
 
