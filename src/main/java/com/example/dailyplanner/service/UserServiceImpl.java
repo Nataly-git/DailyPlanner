@@ -46,11 +46,16 @@ UserServiceImpl implements UserService{
     }
 
     @Override
-    public void addProductToUser(User user, Product product) {
+    public void addProductToUser(User user, Product product, int productWeight) {
         List<Product> products = user.getProducts();
         if(products == null) {
             products = new ArrayList<>();
         }
+        product.setProductWeight(productWeight);
+        product.setProteins(product.getProteins() / 100 * productWeight);
+        product.setFats(product.getFats() / 100 * productWeight);
+        product.setCarbohydrates(product.getCarbohydrates() / 100 * productWeight);
+        product.setCalories(product.getCalories() / 100 * productWeight);
         products.add(product);
         saveUser(user);
     }

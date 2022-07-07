@@ -1,9 +1,6 @@
 package com.example.dailyplanner.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -37,13 +34,13 @@ public class Product {
 
     @Positive(message="Calories amount should be more than 0")
     @Column
-    private int calories;
+    private double calories;
 
-    @Positive(message="Weight amount should be more than 0")
+    @PositiveOrZero(message="Weight amount should be more than 0")
     @Column(name="product_weight")
     private int productWeight = 100;
 
-    @ManyToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH},
+    @ManyToMany(cascade=CascadeType.ALL,
                 fetch = FetchType.EAGER)
     @JoinTable(name="user_calories",
             joinColumns = @JoinColumn(name="product_id"),

@@ -30,10 +30,10 @@
     <tr th:each="product : ${user.products}">
         <td th:text="${product.itemName}"></td>
         <td th:text="${product.productWeight}"></td>
-        <td th:text="${product.proteins / 100 * product.productWeight}"></td>
-        <td th:text="${product.fats / 100 * product.productWeight}"></td>
-        <td th:text="${product.carbohydrates / 100 * product.productWeight}"></td>
-        <td th:text="${product.calories / 100 * product.productWeight}"></td>
+        <td th:text="${product.proteins}"></td>
+        <td th:text="${product.fats}"></td>
+        <td th:text="${product.carbohydrates}"></td>
+        <td th:text="${product.calories}"></td>
         <td>
             <form th:method="POST" th:action="@{/calc/delete/{id}(id=${product.getId()})}">
                 <input type="submit" value="DELETE"/>
@@ -56,9 +56,9 @@
 
 <br>
 
-<!--<form th:method="POST" th:action="@{/products/new}">-->
-<!--    <input type="submit" value="Add new item"/>-->
-<!--</form>-->
+<form th:method="GET" th:action="@{/calc/add}">
+    <input type="submit" value="Back to calculator"/>
+</form>
 
 <hr class="featurette-divider">
 

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,8 +56,7 @@ public class UserProductController {
         if(product == null) {
             throw new NoSuchProductException("Product not found, try again");
         }
-        product.setProductWeight(productWeight);
-        userService.addProductToUser(user, product);
+        userService.addProductToUser(user, product, productWeight);
         return "day_result";
     }
 

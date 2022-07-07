@@ -10,7 +10,7 @@ Create new Product
 <br/>
 <hr/>
 
-<form th:method="POST" th:action="@{/products}" th:object="${product}">
+<form th:method="POST" th:action="@{/products/new}" th:object="${product}">
     <label for="itemName">Enter product name: </label>
     <input type="text" th:field="*{itemName}" id="itemName"/>
     <div style="color:red" th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}">ItemName error</div>

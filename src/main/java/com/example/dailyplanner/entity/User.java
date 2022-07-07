@@ -37,7 +37,7 @@ public class User {
     @NotBlank(message="You should choose one variant")
     private String sex;
 
-    @ManyToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH},
+    @ManyToMany(cascade=CascadeType.ALL,
                 fetch = FetchType.EAGER)
     @JoinTable(name="user_calories",
                joinColumns = @JoinColumn(name="user_id"),
